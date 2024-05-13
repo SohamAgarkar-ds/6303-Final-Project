@@ -1,6 +1,6 @@
 ---
 title: "Untitled"
-author: "Soham Neeraj Agarkar (1002157894)"
+author: "Soham Neeraj Agarkar (1002157894) & Huakang Lu"
 date: "2024-05-07"
 output:
   pdf_document: default
@@ -176,7 +176,7 @@ ggcorrplot(correlation_matrix, type = "lower", lab = TRUE)
 
 The correlation only confirmed our findings. num_reactions has an almost perfect positive correlation with num_likes. This indicates that the increasing number of reactions on the post were directly tied to the number of likes the post was receiving. The other takeaway here is that majority of the reactions to the post had to do with liking the post itself.
 
-## Modelling and Silhouette
+## Modelling and Silhouette 
 
 Firstly, we seperate the features with the highest correlations and scale the the new dataframe.
 

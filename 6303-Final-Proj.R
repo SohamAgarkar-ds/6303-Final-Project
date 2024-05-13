@@ -11,9 +11,6 @@ library(tidyverse)
 #Load the dataset
 df <- read.csv("C:/Users/soham/Documents/Github rep/6303-Final-Project/facebook+live+sellers+in+thailand/Live_20210128.csv", row.names= NULL)
 
-#cleaning the data of extra empty columns
-#columns_to_delete <- c("Column1", "Column2", "Column3", "Column4")
-#new_data <- subset(df, select = -columns_to_delete)
 
 #data view
 head(df)
@@ -100,12 +97,12 @@ pairs(data_subset)
 #calculate correlation matrix
 correlation_matrix <- cor(select(df, -c("status_type","status_published")))
 
-# Plot correlation matrix
+#Plot correlation matrix
 ggcorrplot(correlation_matrix, type = "lower", lab = TRUE)
 
 #considering nu_likes and num_reactions as a datset due to high correlation
-new_df <- select(data_subset, c("num_reactions", "num_likes", "num_shares",
-                                "num_comments", "num_loves"))
+new_df <- select(data_subset, c("num_reactions", "num_comments", "num_likes", 
+                                "num_shares", "num_loves"))
 
 #Scaling the Data
 data_subset_scaled <- scale(new_df)
@@ -123,22 +120,22 @@ print(kmeans_model)
 
 data_subset$cluster <- kmeans_model$cluster
 
-pairs(data_subset_scaled[, -ncol(data_subset_scaled)], 
+pairs(data_subset[, -ncol(data_subset_scaled)], 
       col = kmeans_model$cluster, 
       pch = 16, 
       main = "Scatterplot Matrix with Clusters")
 
 #Aggregating the clusters
-kable(aggregate(data_subset_scaled, by=list(cluster=kmeans_model$cluster), mean),
+kable(aggregate(data_subset, by=list(cluster=kmeans_model$cluster), mean),
       format = "latex",
       booktabs = TRUE) %>% kable_styling(position="center")
 
 #cluster visualization
-fviz_cluster(kmeans_model, data_subset_scaled)
+fviz_cluster(kmeans_model, data_subset)
 
 # Calculate silhouette scores
 silhouette_scores <- silhouette(kmeans_model$cluster, dist(data_subset_scaled))
-print(silhouette_scores)
+
 
 # Mean silhouette score
 mean_silhouette_score <- mean(silhouette_scores[, "sil_width"])
@@ -150,18 +147,18 @@ fviz_nbclust(data_subset_scaled, pam, method="wss") +
 
 #Kmedioids model
 set.seed(7894)
-kmed_model <- pam(data_subset_scaled, k=5)
+kmed_model <- pam(data_subset, k=5)
 print(kmed_model)
 
 
-pairs(data_subset_scaled[, -ncol(data_subset_scaled)], 
+pairs(data_subset[, -ncol(data_subset_scaled)], 
      col = kmed_model$cluster, 
      pch = 16, 
      main = "Scatterplot Matrix with Clusters")
 
 
 #cluster plot
-fviz_cluster(kmed_model, data_subset_scaled)
+fviz_cluster(kmed_model, data_subset)
 
 
 #silhouette socres

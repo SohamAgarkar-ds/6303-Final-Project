@@ -320,7 +320,7 @@ num\_angrys & Feature & Binary & No \\
 \subsubsection{Data View}\label{data-view}
 
 A small sample of the Data was viewed to see some details such as
-available features, the various datatypes comprised within the dataset
+available features, the various +-datatypes comprised within the dataset
 as well its Quartiles.
 
 \begin{Shaded}
@@ -803,7 +803,7 @@ color coded by the clusters within which they are present.
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{\#Aggregating the clusters}
-\FunctionTok{kable}\NormalTok{(}\FunctionTok{aggregate}\NormalTok{(data\_subset\_scaled, }\AttributeTok{by=}\FunctionTok{list}\NormalTok{(}\AttributeTok{cluster=}\NormalTok{kmeans\_model}\SpecialCharTok{$}\NormalTok{cluster), mean),}
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{aggregate}\NormalTok{(data\_subset, }\AttributeTok{by=}\FunctionTok{list}\NormalTok{(}\AttributeTok{cluster=}\NormalTok{kmeans\_model}\SpecialCharTok{$}\NormalTok{cluster), mean),}
       \AttributeTok{format =} \StringTok{"latex"}\NormalTok{,}
       \AttributeTok{booktabs =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{position=}\StringTok{"center"}\NormalTok{)}
 \end{Highlighting}
@@ -811,14 +811,14 @@ color coded by the clusters within which they are present.
 
 \begin{table}
 \centering
-\begin{tabular}{rrrrrr}
+\begin{tabular}{rrrrrrrrrrr}
 \toprule
-cluster & num\_reactions & num\_likes & num\_shares & num\_comments & num\_loves\\
+cluster & num\_reactions & num\_comments & num\_shares & num\_likes & num\_loves & num\_wows & num\_hahas & num\_sads & num\_angrys & cluster\\
 \midrule
-1 & -0.2730390 & -0.2555247 & -0.2576437 & -0.2131312 & -0.2516300\\
-2 & 3.4388266 & 3.5601763 & -0.2158710 & -0.1834131 & -0.2409665\\
-3 & 2.0666203 & 1.5450016 & 5.2397437 & 4.4081884 & 5.4185703\\
-4 & 0.1515768 & 0.0112443 & 1.5856880 & 1.3008751 & 1.5104731\\
+1 & 103.8024 & 34.74663 & 6.116655 & 100.1918 & 2.670263 & 0.4994943 & 0.2366824 & 0.1528995 & 0.0490560 & 1\\
+2 & 1821.0054 & 61.18499 & 11.613941 & 1815.2440 & 3.096515 & 2.4289544 & 0.1983914 & 0.0321716 & 0.0053619 & 2\\
+3 & 1186.1880 & 4146.04273 & 729.572650 & 909.4786 & 229.324786 & 30.6324786 & 12.2905983 & 2.6324786 & 1.8290598 & 3\\
+4 & 300.2404 & 1381.66242 & 248.699045 & 220.0971 & 73.106688 & 2.6066879 & 3.1751592 & 0.7818471 & 0.4633758 & 4\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1102,12 +1102,34 @@ K-Medioids model
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\FunctionTok{kable}\NormalTok{(}\FunctionTok{aggregate}\NormalTok{(data\_subset, }\AttributeTok{by=}\FunctionTok{list}\NormalTok{(}\AttributeTok{cluster=}\NormalTok{kmeans\_model}\SpecialCharTok{$}\NormalTok{cluster), mean),}
+      \AttributeTok{format =} \StringTok{"latex"}\NormalTok{,}
+      \AttributeTok{booktabs =} \ConstantTok{TRUE}\NormalTok{) }\SpecialCharTok{\%\textgreater{}\%} \FunctionTok{kable\_styling}\NormalTok{(}\AttributeTok{position=}\StringTok{"center"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{table}
+\centering
+\begin{tabular}{rrrrrrrrrrr}
+\toprule
+cluster & num\_reactions & num\_comments & num\_shares & num\_likes & num\_loves & num\_wows & num\_hahas & num\_sads & num\_angrys & cluster\\
+\midrule
+1 & 103.8024 & 34.74663 & 6.116655 & 100.1918 & 2.670263 & 0.4994943 & 0.2366824 & 0.1528995 & 0.0490560 & 1\\
+2 & 1821.0054 & 61.18499 & 11.613941 & 1815.2440 & 3.096515 & 2.4289544 & 0.1983914 & 0.0321716 & 0.0053619 & 2\\
+3 & 1186.1880 & 4146.04273 & 729.572650 & 909.4786 & 229.324786 & 30.6324786 & 12.2905983 & 2.6324786 & 1.8290598 & 3\\
+4 & 300.2404 & 1381.66242 & 248.699045 & 220.0971 & 73.106688 & 2.6066879 & 3.1751592 & 0.7818471 & 0.4633758 & 4\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \CommentTok{\#cluster plot}
 \FunctionTok{fviz\_cluster}\NormalTok{(kmed\_model, data\_subset\_scaled)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{Final-Report-6303_files/figure-latex/unnamed-chunk-21-1.pdf}
+\includegraphics{Final-Report-6303_files/figure-latex/unnamed-chunk-22-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
